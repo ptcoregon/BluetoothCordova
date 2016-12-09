@@ -1,0 +1,28 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-ble": {
+            "PACKAGE_NAME": "com.example.bluetoothcordova"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.bluetoothcordova"
+        },
+        "cordova-plugin-ms-azure-mobile-apps": {
+            "PACKAGE_NAME": "com.example.bluetoothcordova"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.example.bluetoothcordova"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.example.bluetoothcordova"
+        }
+    }
+}
