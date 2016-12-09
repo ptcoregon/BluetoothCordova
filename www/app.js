@@ -49,12 +49,102 @@
 			})
 	}
 
+
+	var connectAttempts = 0;
+
 	function connect(device)
 	{
+			evothings.ble.stopScan();
+
+			evothings.ble.connectToDevice(device,
+			function(device)
+	    {
+	      console.log('Connected to device: ' + device.name);
+				connectAttempts = 0;
+				getServiceData(device);
+	    },
+	    function(device)
+	    {
+	      console.log('Disconnected from device: ' + device.name);
+				connectAttempts = 0;
+	    },
+	    function(errorCode)
+	    {
+	      console.log('Connect error: ' + errorCode);
+				console.log("connectAttempts=" + connectAttempts);
+				if (connectAttempts < 2)
+				{
+					setTimeout(connect(device), 500);
+				} else {
+					disconnect(device);
+				}
+				connectAttempts++;
+	    });
+	}
+
+	var dataChar;
+	var dataReturnChar;
+	var ones = new Uint8array([1,1,1,1,1,1,1,1,1]);
+
+	function getServiceData(device)
+	{
+			evothings.ble.readAllServiceData(device,
+			function(services)
+			{
+				dataChar = evothings.ble.getCharacteristic(device,"00000100-0000-1000-8000-00805f9b34fb");
+				dataReturnChar = evothings.ble.getCharacteristic(device,"00000101-0000-1000-8000-00805f9b34fb");
+				sendData(device,ones);
+
+			}, function (error)
+			{
+				console.log("readAllServiceData error: " + error);
+			})
 
 	}
 
+	function sendData(device,data)
+	{
+		evothings.ble.writeCharacteristic(device,dataReturnChar,new Uint8array(data),
+		function()
+		{
+			console.log("Data written successfully");
+			readData(device);
+		}, function(error){
+			console.log("Data write error: " + error);
+		});
+	}
 
+	function readData(device){
+		evothings.ble.readCharacteristic(device,dataChar,
+		function(readData){
+			console.log('characteristic data: ' + readData.toString());
+
+			var data = new Uint8array(readData);
+			if (data[0] == 0)
+			{
+				sendData(ones);
+			} else {
+				sendData(data);
+				if (data[0] == 62)
+				{
+					console.log("62 array received");
+					disconnect(device);
+				}
+			}
+
+		}, function(error){
+			console.log("readCharacteristic error: " + error);
+		}
+	}
+
+	function disconnect(device)
+	{
+		evothings.ble.close(device);
+		console.log("disconnected");
+		connectAttempts = 0;
+		startScan();
+
+	}
 
 	// Map the RSSI value to a value between 1 and 100.
 	function mapDeviceRSSI(rssi)
