@@ -121,6 +121,7 @@
 		function()
 		{
 			console.log("Data written successfully");
+			readData(device);
 			if (sent62s)
 			{
 				disconnect(device);
