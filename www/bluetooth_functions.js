@@ -11,10 +11,11 @@
 	function onDeviceReady()
 	{
 		// Start tracking devices!
-		setTimeout(startScan, 1000)
+		//setTimeout(startScan, 1000)
 
 		// Timer that refreshes the display.
 		timer = setInterval(updateDeviceList, 1000)
+		startAzure();
 	}
 
 	function onBackButtonDown()
