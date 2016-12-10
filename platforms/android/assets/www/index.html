@@ -28,7 +28,9 @@ Demo of using the BLE Plugin API for scanning for BLE devices.
 
 	<p id="message">Preparing...</p>
 
-	<div id="found-devices"></div>
+	<div id="found-devices" style="height:300px;overflow:scroll"></div>
+
+	<p id="data"></p>
 
 	<!--
 	Including cordova.js will automatically include the JavaScript library
@@ -40,6 +42,21 @@ Demo of using the BLE Plugin API for scanning for BLE devices.
 	Include application code.
 	-->
 	<script src="app.js"></script>
+
+	<script>
+		function handleData(data)
+		{
+			var element = document.getElementById("data");
+			var text = element.innerHTML;
+			var newText = "";
+			for (var x = 0; x < 9; x++)
+			{
+				newText = newText + data[x] + " ";
+			}
+			newText = newText + "<br>" + text;
+			element.innerHTML = newText;
+		}
+	</script>
 </body>
 
 </html>

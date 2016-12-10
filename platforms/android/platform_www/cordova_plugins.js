@@ -39,10 +39,10 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-ble": "2.0.1",
-    "cordova-plugin-whitelist": "1.3.0",
     "cordova-plugin-inappbrowser": "1.5.0",
     "cordova-sqlite-storage": "1.4.8",
-    "cordova-plugin-ms-azure-mobile-apps": "2.0.0"
+    "cordova-plugin-ms-azure-mobile-apps": "2.0.0",
+    "cordova-plugin-whitelist": "1.3.0"
 };
 // BOTTOM OF METADATA
 });

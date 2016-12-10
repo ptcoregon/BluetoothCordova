@@ -10,10 +10,10 @@
         "cordova-plugin-ble": {
             "PACKAGE_NAME": "com.example.bluetoothcordova"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-ms-azure-mobile-apps": {
             "PACKAGE_NAME": "com.example.bluetoothcordova"
         },
-        "cordova-plugin-ms-azure-mobile-apps": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.example.bluetoothcordova"
         }
     },
